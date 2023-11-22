@@ -14,3 +14,39 @@ def calcul(etableau):                                                           
 
 def graphique(etableau):                                                        #Fonction qui permet de générer un graphique qui va être affiché sur la page web
     print(salut)
+
+
+
+
+
+
+
+
+def test():
+    print("helloworld")
+
+test()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
