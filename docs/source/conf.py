@@ -14,11 +14,11 @@ author = 'Jules'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-'sphinx.ext.todo',
-'sphinx.ext.mathjax',
-'sphinx.ext.ifconfig',
-'sphinx.ext.autodoc',
-'sphinx.ext.viewcode',
+    'sphinx.ext.todo',
+    'sphinx.ext.mathjax',
+    'sphinx.ext.ifconfig',
+    'sphinx.ext.autodoc',
+    'sphinx.ext.viewcode',
 ]
 
 templates_path = ['_templates']
