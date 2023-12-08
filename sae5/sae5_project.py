@@ -6,8 +6,36 @@ import matplotlib.pyplot as plt
 from numpy import linspace, array, sin, cos, pi
 
 #Lecture du fichier excel et enregistrement des données dans la variable etableau
-book = xlrd.open_workbook("../data/conductivite_amont.xls")
 
+def tableau():
+    tab = xlrd.open_workbook("../data/conductivite_amont.xls")
+    
+    print("Nombre de feuilles: "+str(tab.nsheets))
+    print("Noms des feuilles: "+str(tab.sheet_names()))
+    
+    feuille_1 = tab.sheet_by_index(0)
+    feuille_1 = tab.sheet_by_name("Fonction 1")
+    
+    print("Format de la feuille 1:")
+    print("Nom: "+str(feuille_1.name))
+    print("Nombre de lignes: "+str(feuille_1.nrows))
+    print("Nombre de colonnes: "+str(feuille_1.ncols))
+    
+    cols = feuille_1.ncols
+    rows = feuille_1.nrows
+    
+    X = []
+    Y= []
+    
+    for r in range(1, rows):
+        X += [feuille_1.cell_value(rowx=r, colx=0)]
+        Y += [feuille_1.cell_value(rowx=r, colx=1)]
+    
+    plt.plot(X, Y)
+    plt.show()
+        
+    
+    
 
 def graphique():
     fig, axes = plt.subplots()  # Creation d'un figure avec un seul axe
@@ -47,36 +75,36 @@ def main():
                 </head>
                 <body>
                     <nav>
-                        <button class="logo"></button>
-                        <button class="table"></button>
-                        <button class="graphique"></button>
+                        <div class="logo"><a href="https://www.univ-poitiers.fr/"><img class="logo" src="img/universite-poitiers-logo.jpg" alt="logo"></a></div>
+                        <div class="table"></div>
+                        <div class="graphique"></div>
                     </nav>
                     <h1>Voici la page html qui va afficher un tableau et un graphique</h1>
-                    <div class="main">
-                        <div class="tab">
-                            <table>
-                            <tr>
-                                <td> Titre colonne 1 </td>
-                                <td> Titre colonne 2 </td>
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>12</td>
-                            </tr>
-                            <tr>
-                                <td>21</td>
-                                <td>22</td>
-                            </tr>
-                            <tr>
-                                <td>31</td>
-                                <td>32</td>
-                            </tr>
-                            </table> 
-                        </div>
-                        <div class="graph">
-                            <img class="graphique" src="img/graphique.png" alt="logo">
-                        </div>
+                    <div class="description" ></div>
+                    <div class="tab">
+                        <table>
+                        <tr>
+                            <td> """,colonne_1,""" </td>
+                            <td> """,colonne_2,""" </td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>21</td>
+                            <td>22</td>
+                        </tr>
+                        <tr>
+                            <td>31</td>
+                            <td>32</td>
+                        </tr>
+                        </table> 
                     </div>
+                    <div class="graph">
+                        <img class="graphique" src="img/graphique.png" alt="logo">
+                    </div>
+                    
                 
                 </body>
                 </html> 
@@ -105,22 +133,36 @@ def stylesheet():
                   color : blue;    
                 }
                 
-                div.main {
+                div.description {
                   background-color: gray;
-                  height: 200%;
+                  height: 500px;
                   width: 100%;
                   position: absolute;
-                  top: 8%;
+                  top: 75px;
                   left: 0px;
                   right: 0px;
                 }
                 
                 div.tab {
-                  w
+                  background-color: #a3a3a3;
+                  height: 1000px;
+                  width: 100%;
+                  position: absolute;
+                  top: 575px;
+                  left: 0px;
+                  right: 0px;
+            
                 }
                 
                 div.graph {
-                  w
+                  background-color: #7a7878;
+                  height: 1000px;
+                  width: 100%;
+                  position: absolute;
+                  top: 1575px;
+                  left: 0px;
+                  right: 0px;
+                  
                 }
                 
                 table, th, td {
@@ -128,11 +170,30 @@ def stylesheet():
                   border-collapse: collapse;
                 }
                 
-                button.logo {
-                 background-image: url("img/universite-poitiers-logo.jpg");
-                 width:100px;
-                 height:75px;
+                table {
+                  position: relative;  
+                  right:40%
+                  top: 100px;
                   
+                }
+                div.logo {
+                 width: 100px;
+                 height: 75px;
+                }
+                
+                img.logo {
+                  width: 100%;  
+                  height:100%;  
+                    
+                }
+                
+                img.graphique {
+                  position: absolute;
+                  display: block;
+                  margin: auto;
+                  width: 700px;  
+                  height: 500px;  
+                    
                 }
            """
     genere_css("../html/stylesheet.css", "mon titre", body_css)

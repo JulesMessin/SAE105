@@ -18,22 +18,36 @@
                   color : blue;    
                 }
                 
-                div.main {
+                div.description {
                   background-color: gray;
-                  height: 200%;
+                  height: 500px;
                   width: 100%;
                   position: absolute;
-                  top: 8%;
+                  top: 75px;
                   left: 0px;
                   right: 0px;
                 }
                 
                 div.tab {
-                  w
+                  background-color: #a3a3a3;
+                  height: 1000px;
+                  width: 100%;
+                  position: absolute;
+                  top: 575px;
+                  left: 0px;
+                  right: 0px;
+                  align-items: center;
                 }
                 
                 div.graph {
-                  w
+                  background-color: #7a7878;
+                  height: 1000px;
+                  width: 100%;
+                  position: absolute;
+                  top: 1575px;
+                  left: 0px;
+                  right: 0px;
+                  
                 }
                 
                 table, th, td {
@@ -41,10 +55,29 @@
                   border-collapse: collapse;
                 }
                 
-                button.logo {
-                 background-image: url("img/universite-poitiers-logo.jpg");
-                 width:100px;
-                 height:75px;
+                table {
+                  position: relative;  
+                  right:40%
+                  top: 100px;
                   
+                }
+                div.logo {
+                 width: 100px;
+                 height: 75px;
+                }
+                
+                img.logo {
+                  width: 100%;  
+                  height:100%;  
+                    
+                }
+                
+                img.graphique {
+                  position: absolute;
+                  display: block;
+                  margin: auto;
+                  width: 700px;  
+                  height: 500px;  
+                    
                 }
            
