@@ -1,9 +1,31 @@
 """import sae5_module.py"""
+import xlrd
 
-import pandas
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+from numpy import linspace, array, sin, cos, pi
+
 #Lecture du fichier excel et enregistrement des données dans la variable etableau
-#table = pandas.read_excel("../data/conductivite_amont.xls")
+book = xlrd.open_workbook("../data/conductivite_amont.xls")
 
+
+def graphique():
+    fig, axes = plt.subplots()  # Creation d'un figure avec un seul axe
+    axes.set_xlabel('x') #label de l'axe des abscisses
+    axes.set_ylabel('y') #label de l'axe des ordonnées
+    axes.set_title('Signal sinusoïdal') #titre du graphique
+    #gènère un tableau de 200 points uniformément répartis entre 0 et 2*pi
+    x = linspace(0,2*pi,200)
+    y = sin(x)
+    #dessine la fonction y = f(x) de couleur verte, epaisseur=2
+    axes.plot(x, y, color = "green", linewidth= 2, linestyle='-.', label='y = sin(x)')
+    y2 = cos(x)
+    #avec label écrit en latex
+    axes.plot(x, y2, color = "red", lw= 2, linestyle='-', label=r"$y = \cos(x)$")
+    #positionne la légende
+    axes.legend(loc='best')
+    #enregistre une capture de la figure
+    fig.savefig("../html/img/graphique.png")
 
 def genere_html(filename, titre_page, body_html):
     fichier = open(filename, 'w')
@@ -24,9 +46,11 @@ def main():
                     <link rel="stylesheet" href="stylesheet.css">
                 </head>
                 <body>
-                    <header>
-                    <img src="img/universite-poitiers-logo.jpg" alt="Italian Trulli">
-                    </header>
+                    <nav>
+                        <button class="logo"></button>
+                        <button class="table"></button>
+                        <button class="graphique"></button>
+                    </nav>
                     <h1>Voici la page html qui va afficher un tableau et un graphique</h1>
                     <div class="main">
                         <div class="tab">
@@ -49,7 +73,9 @@ def main():
                             </tr>
                             </table> 
                         </div>
-                        <div class="graph"></div>
+                        <div class="graph">
+                            <img class="graphique" src="img/graphique.png" alt="logo">
+                        </div>
                     </div>
                 
                 </body>
@@ -64,9 +90,15 @@ def stylesheet():
                   background-color: blue;
                 }
                 
-                header {
+                nav {
                   background-color: white;  
-                  height: 100%;
+                  width: 100%;
+                  height: 75px;
+                  position: fixed;
+                  top: 0px;
+                  left: 0px;
+                  right: 0px;
+                  z-index: 5;
                 }
                 
                 h1 {
@@ -74,10 +106,15 @@ def stylesheet():
                 }
                 
                 div.main {
-                  background-color: white;
-                  height: 70%;
+                  background-color: gray;
+                  height: 200%;
                   width: 100%;
+                  position: absolute;
+                  top: 8%;
+                  left: 0px;
+                  right: 0px;
                 }
+                
                 div.tab {
                   w
                 }
@@ -85,9 +122,16 @@ def stylesheet():
                 div.graph {
                   w
                 }
+                
                 table, th, td {
                   border: 1px solid;
                   border-collapse: collapse;
+                }
+                
+                button.logo {
+                 background-image: url("img/universite-poitiers-logo.jpg");
+                 width:100px;
+                 height:75px;
                   
                 }
            """
