@@ -1,39 +1,43 @@
 """import sae5_module.py"""
 import openpyxl
-import pandas as pd
-import matplotlib as mpl
 import matplotlib.pyplot as plt
-from numpy import linspace, array, sin, cos, pi
 
 #Lecture du fichier excel et enregistrement des données dans la variable etableau
+workbook = openpyxl.load_workbook("../data/conductivite_amont.xlsx", data_only = True)
+titres_onglets = workbook.sheetnames
+onglet1 = workbook[titres_onglets[0]]
+min_row_o1 = onglet1.min_row
+max_row_o1 = onglet1.max_row
+min_col_o1 = onglet1.min_column
+max_col_o1 = onglet1.max_column
+# openpyxl >= 2.6
+for col in onglet1.iter_cols(min_row = min_row_o1, max_row = max_row_o1, min_col = min_col_o1, max_col = max_col_o1, values_only=True):
+    if col[0]=='Value':
+        value_list=col
+    elif col[0]=='Date/Time':
+        date_list=col
 
-value = pd.read_excel("../data/conductivite_amont.xlsx",usecols=['Value'],names=['Value'])
-value = str(value)
-date = pd.read_excel("../data/conductivite_amont.xlsx",usecols=['Date/Time'])
-date = str(date)
-value_list = value.split()
-date_list = date.split()
-
+value_list=list(value_list)
+value_list.pop(0)
+date_list=list(date_list)
+date_list.pop(0)
 print(value_list)
-print(date_list)
+#ferme le fichier excel
+workbook.close()
 
-    
+date_s_list=[]
+for i in range(len(date_list)):
+    date_s_list.append(i)
+print(date_s_list)
 
 
-def graphique(date_list,value_list):
-    fig, axes = plt.subplots()  # Creation d'un figure avec un seul axe
-    axes.set_xlabel(date_list[0]) #label de l'axe des abscisses
-    axes.set_ylabel(value_list[0]) #label de l'axe des ordonnées
-    axes.set_title('Tracé des concentrations en sel au cours du temps') #titre du graphique
-    #gènère un tableau de 200 points uniformément répartis entre 0 et 2*pi
-    x = linspace(0,100,200)
-    y = linspace(0,100,200)
-    #dessine la fonction y = f(x) de couleur verte, epaisseur=2
-    axes.plot(x, y, color = "green", linewidth= 2, linestyle='-')
-    #positionne la légende
-    axes.legend(loc='best')
-    #enregistre une capture de la figure
-    fig.savefig("../html/img/graphique.png")
+fig = plt.plot(value_list)  # Creation d'un figure avec un seul axe
+plt.xlim(0,len(date_s_list)/2)
+plt.xlabel("Temps en s")
+plt.ylabel("Concentration de sel en cm")
+plt.title("Concentration en sel au cours du temps")
+plt.savefig("../html/img/graphique.png")
+plt.show()
 
 def genere_html(filename, titre_page, body_html):
     fichier = open(filename, 'w')
@@ -55,12 +59,22 @@ def main():
                 </head>
                 <body>
                     <nav>
-                        <div class="logo"><a href="https://www.univ-poitiers.fr/"><img class="logo" src="img/universite-poitiers-logo.jpg" alt="logo"></a></div>
-                        <div class="table"></div>
-                        <div class="graphique"></div>
+                        <a href="https://www.univ-poitiers.fr/"><img src="img/universite-poitiers-logo.jpg" alt="logo"></a>
+                        <a href="">Graphique</a>
+                        <a href="">Graphique</a>
                     </nav>
+                    
                     <h1>Voici la page html qui va afficher un tableau et un graphique</h1>
-                    <div class="description" ></div>
+                    
+                    <div class="description" >
+                        <p>blabazbdsauhbduahdhzuiahdiuahduiahdaudhaidh
+                        blabazbdsauhbduahdhzuiahdiuahduiahdaudhaidh
+                        blabazbdsauhbduahdhzuiahdiuahduiahdaudhaidh
+                        blabazbdsauhbduahdhzuiahdiuahduiahdaudhaidh
+                        blabazbdsauhbduahdhzuiahdiuahduiahdaudhaidh
+                        blabazbdsauhbduahdhzuiahdiuahduiahdaudhaidh</p>
+                    </div>
+                    
                     <div class="tab">
                         <p></p>
                         <table>
@@ -83,7 +97,7 @@ def main():
                         </table> 
                     </div>
                     <div class="graph">
-                        <img class="graphique" src="img/graphique.png" alt="logo">
+                        <img src="img/graphique.png" alt="logo">
                     </div>
                     
                 
@@ -101,13 +115,15 @@ def stylesheet():
                 
                 nav {
                   background-color: white;  
-                  width: 100%;
+                  width: 91%;
+                  margin-left: 4%;
+                  margin-right: 5%;
                   height: 75px;
                   position: fixed;
-                  top: 0px;
-                  left: 0px;
-                  right: 0px;
+                  margin-top: 10px;
                   z-index: 5;
+                  display: inline;
+                  border-radius: 10px;
                 }
                 
                 h1 {
@@ -115,34 +131,49 @@ def stylesheet():
                 }
                 
                 div.description {
-                  background-color: gray;
-                  height: 500px;
+                  background-image: url("img/wallpaper_description.jpeg");
+                  background-size: cover;
+                  background-repeat: no-repeat;
+                  height: 100%;
                   width: 100%;
                   position: absolute;
-                  top: 75px;
+                  top: 0px;
                   left: 0px;
                   right: 0px;
+                  text-align: center;
                 }
                 
+                div.description p {
+                  margin-top: 23%;  
+                  color: white;
+                  font-weight: bolder;
+                  font-size: 150%;
+                    
+                
+                }
+
                 div.tab {
-                  background-color: #a3a3a3;
-                  height: 1000px;
+                  background-color: #686868;
+                  height: 100%;
                   width: 100%;
                   position: absolute;
-                  top: 575px;
+                  top: 100%;
                   left: 0px;
                   right: 0px;
+                  align-items: center;
             
                 }
                 
                 div.graph {
-                  background-color: #7a7878;
+                  background-color: #E9E9E9;
                   height: 1000px;
                   width: 100%;
                   position: absolute;
-                  top: 1575px;
+                  top: 200%;
                   left: 0px;
                   right: 0px;
+                  text-align: center;
+                  justify-content: center;
                   
                 }
                 
@@ -157,24 +188,30 @@ def stylesheet():
                   top: 100px;
                   
                 }
-                div.logo {
-                 width: 100px;
-                 height: 75px;
+                
+                
+  
+                nav a:hover {
+                  background-color: red;
+                  color:white;
                 }
                 
-                img.logo {
-                  width: 100%;  
-                  height:100%;  
-                    
-                }
-                
-                img.graphique {
+                nav a img{
                   position: absolute;
-                  display: block;
-                  margin: auto;
+                  width: 100px;
+                  height: 70px; 
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                }
+      
+                div.graph img {
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
                   width: 700px;  
                   height: 500px;  
-                    
                 }
            """
     genere_css("../html/stylesheet.css", "mon titre", body_css)
@@ -188,7 +225,6 @@ if __name__ == "__main__":
     print("50%...")
     print("75%...")
     print("100%...")
-    graphique(date_list,value_list)
     main()
     stylesheet()
     
