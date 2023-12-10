@@ -1,55 +1,35 @@
 """import sae5_module.py"""
-import xlrd
-
+import openpyxl
+import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from numpy import linspace, array, sin, cos, pi
 
 #Lecture du fichier excel et enregistrement des données dans la variable etableau
 
-def tableau():
-    tab = xlrd.open_workbook("../data/conductivite_amont.xls")
-    
-    print("Nombre de feuilles: "+str(tab.nsheets))
-    print("Noms des feuilles: "+str(tab.sheet_names()))
-    
-    feuille_1 = tab.sheet_by_index(0)
-    feuille_1 = tab.sheet_by_name("Fonction 1")
-    
-    print("Format de la feuille 1:")
-    print("Nom: "+str(feuille_1.name))
-    print("Nombre de lignes: "+str(feuille_1.nrows))
-    print("Nombre de colonnes: "+str(feuille_1.ncols))
-    
-    cols = feuille_1.ncols
-    rows = feuille_1.nrows
-    
-    X = []
-    Y= []
-    
-    for r in range(1, rows):
-        X += [feuille_1.cell_value(rowx=r, colx=0)]
-        Y += [feuille_1.cell_value(rowx=r, colx=1)]
-    
-    plt.plot(X, Y)
-    plt.show()
-        
-    
+value = pd.read_excel("../data/conductivite_amont.xlsx",usecols=['Value'],names=['Value'])
+value = str(value)
+date = pd.read_excel("../data/conductivite_amont.xlsx",usecols=['Date/Time'])
+date = str(date)
+value_list = value.split()
+date_list = date.split()
+
+print(value_list)
+print(date_list)
+
     
 
-def graphique():
+
+def graphique(date_list,value_list):
     fig, axes = plt.subplots()  # Creation d'un figure avec un seul axe
-    axes.set_xlabel('x') #label de l'axe des abscisses
-    axes.set_ylabel('y') #label de l'axe des ordonnées
-    axes.set_title('Signal sinusoïdal') #titre du graphique
+    axes.set_xlabel(date_list[0]) #label de l'axe des abscisses
+    axes.set_ylabel(value_list[0]) #label de l'axe des ordonnées
+    axes.set_title('Tracé des concentrations en sel au cours du temps') #titre du graphique
     #gènère un tableau de 200 points uniformément répartis entre 0 et 2*pi
-    x = linspace(0,2*pi,200)
-    y = sin(x)
+    x = linspace(0,100,200)
+    y = linspace(0,100,200)
     #dessine la fonction y = f(x) de couleur verte, epaisseur=2
-    axes.plot(x, y, color = "green", linewidth= 2, linestyle='-.', label='y = sin(x)')
-    y2 = cos(x)
-    #avec label écrit en latex
-    axes.plot(x, y2, color = "red", lw= 2, linestyle='-', label=r"$y = \cos(x)$")
+    axes.plot(x, y, color = "green", linewidth= 2, linestyle='-')
     #positionne la légende
     axes.legend(loc='best')
     #enregistre une capture de la figure
@@ -82,10 +62,11 @@ def main():
                     <h1>Voici la page html qui va afficher un tableau et un graphique</h1>
                     <div class="description" ></div>
                     <div class="tab">
+                        <p></p>
                         <table>
                         <tr>
-                            <td> """,colonne_1,""" </td>
-                            <td> """,colonne_2,""" </td>
+                            <td> ,colonne_1, </td>
+                            <td> ,colonne_2, </td>
                         </tr>
                         <tr>
                             <td>11</td>
@@ -207,5 +188,7 @@ if __name__ == "__main__":
     print("50%...")
     print("75%...")
     print("100%...")
+    graphique(date_list,value_list)
     main()
     stylesheet()
+    
