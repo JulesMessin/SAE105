@@ -27,7 +27,7 @@ date_list.pop(0)
 #On ferme le fichier excel
 workbook.close()
 
-#Création d'une variable date_s_list à partir de la liste date_list, permet d'obtenir le temps en s en focntion du nombre de valeur
+#Création d'une variable date_s_list à partir de la liste date_list, permet d'obtenir le temps en s en fonction du nombre de valeur
 date_s_list=[]
 for i in range(len(date_list)):
     date_s_list.append(i)
@@ -65,7 +65,7 @@ def genere_html(filename, titre_page, body_html):
     
 def genere_css(filename, titre_page, body_css):
     """
-
+    
     Parameters
     ----------
     filename : TYPE
@@ -84,7 +84,6 @@ def genere_css(filename, titre_page, body_css):
     fichier.write("".join(body_css))
     fichier.close()
     
-
 def main():
     """
 
@@ -147,7 +146,6 @@ def main():
                 </html> 
            """
     genere_html("../html/index.html", "mon titre", body_html)
-    print("La page html a bien été crée sous le nom de index.html")
     
 def stylesheet():
     """
@@ -266,16 +264,9 @@ def stylesheet():
                 }
            """
     genere_css("../html/stylesheet.css", "mon titre", body_css)
-    print("La page css a bien été crée sous le nom de stylesheet.css")
    
 
 if __name__ == "__main__":
-    print("création des fichiers...")
-    print("0%...")
-    print("25%...")
-    print("50%...")
-    print("75%...")
-    print("100%...")
     main()
     stylesheet()
     
