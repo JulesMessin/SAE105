@@ -126,6 +126,10 @@ def stylesheet():
                   border-radius: 10px;
                 }
                 
+                nav a  {
+                        
+                }
+                
                 h1 {
                   color : blue;    
                 }
@@ -145,11 +149,9 @@ def stylesheet():
                 
                 div.description p {
                   margin-top: 23%;  
-                  color: white;
+                  color: gray;
                   font-weight: bolder;
                   font-size: 150%;
-                    
-                
                 }
 
                 div.tab {
