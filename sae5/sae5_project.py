@@ -2,7 +2,7 @@
 import openpyxl
 import matplotlib.pyplot as plt
 
-#Lecture du fichier excel et enregistrement des données dans la variable etableau
+#Lecture du fichier excel et enregistrement des données dans les variables value_list et date_list
 workbook = openpyxl.load_workbook("../data/conductivite_amont.xlsx", data_only = True)
 titres_onglets = workbook.sheetnames
 onglet1 = workbook[titres_onglets[0]]
@@ -10,29 +10,32 @@ min_row_o1 = onglet1.min_row
 max_row_o1 = onglet1.max_row
 min_col_o1 = onglet1.min_column
 max_col_o1 = onglet1.max_column
-# openpyxl >= 2.6
 for col in onglet1.iter_cols(min_row = min_row_o1, max_row = max_row_o1, min_col = min_col_o1, max_col = max_col_o1, values_only=True):
     if col[0]=='Value':
         value_list=col
     elif col[0]=='Date/Time':
         date_list=col
 
+#conversion de la liste value_list en list, puis on enlève la première valeur de la liste qui est "Valeur"
 value_list=list(value_list)
 value_list.pop(0)
+
+#conversion de la liste date_list en list, puis on enlève la première valeur de la liste qui est "Date/Time"
 date_list=list(date_list)
 date_list.pop(0)
-print(value_list)
-#ferme le fichier excel
+
+#On ferme le fichier excel
 workbook.close()
 
+#Création d'une variable date_s_list à partir de la liste date_list, permet d'obtenir le temps en s en focntion du nombre de valeur
 date_s_list=[]
 for i in range(len(date_list)):
     date_s_list.append(i)
-print(date_s_list)
+date_s_list=len(date_s_list)/2
 
-
-fig = plt.plot(value_list)  # Creation d'un figure avec un seul axe
-plt.xlim(0,len(date_s_list)/2)
+# Creation d'un figure
+fig = plt.plot(value_list)
+plt.xlim(0,date_s_list)
 plt.xlabel("Temps en s")
 plt.ylabel("Concentration de sel en cm")
 plt.title("Concentration en sel au cours du temps")
@@ -40,17 +43,56 @@ plt.savefig("../html/img/graphique.png")
 plt.show()
 
 def genere_html(filename, titre_page, body_html):
+    """
+
+    Parameters
+    ----------
+    filename : TYPE
+        DESCRIPTION.
+    titre_page : TYPE
+        DESCRIPTION.
+    body_html : TYPE
+        DESCRIPTION.
+
+    Returns
+    -------
+    Cette fonction va permettre de générer le fichier html.
+
+    """
     fichier = open(filename, 'w')
     fichier.write("".join(body_html))
     fichier.close()
     
 def genere_css(filename, titre_page, body_css):
+    """
+
+    Parameters
+    ----------
+    filename : TYPE
+        DESCRIPTION.
+    titre_page : TYPE
+        DESCRIPTION.
+    body_css : TYPE
+        DESCRIPTION.
+
+    Returns
+    -------
+    Cette fonction va permettre de générer le fichier css.
+
+    """
     fichier = open(filename, 'w')
     fichier.write("".join(body_css))
     fichier.close()
     
 
 def main():
+    """
+
+    Returns
+    -------
+    Création de la structure de la page html.
+
+    """
     body_html = """ 
                 <!DOCTYPE html>
                 <html>
@@ -108,6 +150,13 @@ def main():
     print("La page html a bien été crée sous le nom de index.html")
     
 def stylesheet():
+    """
+
+    Returns
+    -------
+    Création de la structure de la page css.
+
+    """
     body_css = """ 
                 body {
                   background-color: blue;
