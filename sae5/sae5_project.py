@@ -49,10 +49,10 @@ def genere_html(filename, titre_page, body_html):
     ----------
     filename : TYPE
         DESCRIPTION.
-    titre_page : TYPE
-        DESCRIPTION.
-    body_html : TYPE
-        DESCRIPTION.
+    titre_page : HTML
+        Permet d'afficher le titre de la page.
+    body_html : HTML
+        Contient le code qui permet d'afficher la page html.
 
     Returns
     -------
@@ -71,9 +71,9 @@ def genere_css(filename, titre_page, body_css):
     filename : TYPE
         DESCRIPTION.
     titre_page : TYPE
-        DESCRIPTION.
-    body_css : TYPE
-        DESCRIPTION.
+        
+    body_css : CSS
+        Contient le code css qui modifie la page html
 
     Returns
     -------
@@ -264,7 +264,19 @@ def stylesheet():
                 }
            """
     genere_css("../html/stylesheet.css", "mon titre", body_css)
-   
+
+#Fonction permettant de calculer le débit d'une riviére
+def débit():
+    Masse = 1037
+    T = date_s_list
+    for moyenne in range(col[5]):
+        Cm = moyenne[moyenne]
+        moyenne = moyenne[moyenne+1]
+    Ci = col[5]row[2]
+    deltaC = Cm - Ci
+    NaCi = deltaC/2
+    D = Masse/(NaCi*T)
+    return D
 
 if __name__ == "__main__":
     main()
