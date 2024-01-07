@@ -1,10 +1,10 @@
- 
+
                 body {
-                  background-color: blue;
+                  background-color: #E9E9E9;
                 }
-                
+
                 nav {
-                  background-color: white;  
+                  background-color: white;
                   width: 91%;
                   margin-left: 4%;
                   margin-right: 5%;
@@ -14,18 +14,10 @@
                   z-index: 5;
                   display: inline;
                   border-radius: 10px;
+                  border: 1px solid black;
                 }
-                
-                nav a  {
-                        
-                }
-                
-                h1 {
-                  color : blue;    
-                }
-                
+
                 div.description {
-                  background-image: url("img/wallpaper_description.jpeg");
                   background-size: cover;
                   background-repeat: no-repeat;
                   height: 100%;
@@ -36,73 +28,78 @@
                   right: 0px;
                   text-align: center;
                 }
-                
+
                 div.description p {
-                  margin-top: 23%;  
-                  color: gray;
+                  margin-top: 23%;
+                  color: black;
+                  font-family: monospace;
                   font-weight: bolder;
                   font-size: 150%;
                 }
 
-                div.tab {
-                  background-color: #686868;
-                  height: 100%;
+                div.resultat {
+                  background-color: #E9E9E9;
+                  height: 1000px;
                   width: 100%;
                   position: absolute;
                   top: 100%;
                   left: 0px;
                   right: 0px;
-                  align-items: center;
-            
-                }
-                
-                div.graph {
-                  background-color: #E9E9E9;
-                  height: 1000px;
-                  width: 100%;
-                  position: absolute;
-                  top: 200%;
-                  left: 0px;
-                  right: 0px;
                   text-align: center;
                   justify-content: center;
-                  
                 }
-                
-                table, th, td {
-                  border: 1px solid;
-                  border-collapse: collapse;
-                }
-                
-                table {
-                  position: relative;  
-                  right:40%
-                  top: 100px;
-                  
-                }
-                
-                
-  
-                nav a:hover {
-                  background-color: red;
-                  color:white;
-                }
-                
+
                 nav a img{
                   position: absolute;
                   width: 100px;
-                  height: 70px; 
+                  height: 70px;
                   top: 50%;
                   left: 50%;
                   transform: translate(-50%, -50%);
                 }
-      
-                div.graph img {
+
+                div.resultat img {
                   position: absolute;
-                  top: 50%;
-                  left: 50%;
+                  top: 65%;
+                  left: 75%;
                   transform: translate(-50%, -50%);
-                  width: 700px;  
-                  height: 500px;  
+                  width: 700px;
+                  height: 500px;
+                  border-radius: 30px;
+                  border: 1px solid black;
+                }
+                div.resultat div.box {
+                  background-color: white;
+                  position: absolute;
+                  top: 65%;
+                  left: 25%;
+                  transform: translate(-50%, -50%);
+                  width: 700px;
+                  height: 500px;
+                  border-radius: 30px;
+                  border: 1px solid black;
+                }
+                p1 {
+                  position: absolute;  
+                  width: 700px;
+                  top: 32.5%;
+                  left: 25%;
+                  transform: translate(-50%, -50%);  
+                  color: black;
+                  font-family: monospace;
+                  font-size: 20px;
+                  font-weight: bolder;
+                
+                }
+                p2 {
+                  position: absolute;  
+                  width: 700px;
+                  top: 32.5%;
+                  left: 75%;
+                  transform: translate(-50%, -50%);
+                  color: black;
+                  font-family: monospace;
+                  font-size: 20px;
+                  font-weight: bolder;
                 }
            

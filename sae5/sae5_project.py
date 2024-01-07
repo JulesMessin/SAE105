@@ -2,6 +2,10 @@
 import openpyxl
 import matplotlib.pyplot as plt
 
+
+#Je n'ai pas mis de fonction pour toute cette partie car cela provoque une erreur que je n'ai pas su résoudre à la génération du graphique (crée une sorte de griboullage sur le graphique obtenue)
+
+
 #Lecture du fichier excel et enregistrement des données dans les variables value_list et date_list
 workbook = openpyxl.load_workbook("../data/conductivite_amont.xlsx", data_only = True)
 titres_onglets = workbook.sheetnames
@@ -44,6 +48,7 @@ plt.show()
 
 def genere_html(filename, titre_page, body_html):
     """
+    Cette fonction va permettre de générer le fichier html.
 
     Parameters
     ----------
@@ -56,112 +61,86 @@ def genere_html(filename, titre_page, body_html):
 
     Returns
     -------
-    Cette fonction va permettre de générer le fichier html.
 
     """
     fichier = open(filename, 'w')
     fichier.write("".join(body_html))
     fichier.close()
-    
+
 def genere_css(filename, titre_page, body_css):
     """
-    
+    Cette fonction va permettre de générer le fichier css.    
+
     Parameters
     ----------
     filename : TYPE
         DESCRIPTION.
     titre_page : TYPE
-        
+
     body_css : CSS
         Contient le code css qui modifie la page html
 
     Returns
     -------
-    Cette fonction va permettre de générer le fichier css.
 
     """
     fichier = open(filename, 'w')
     fichier.write("".join(body_css))
     fichier.close()
-    
-def main():
-    """
 
-    Returns
-    -------
+def main(calcul):
+    """
     Création de la structure de la page html.
 
+    Returns
+    -------
+
     """
-    body_html = """ 
+    body_html = """
                 <!DOCTYPE html>
                 <html>
-                <head>
-                    <link rel="stylesheet" href="stylesheet.css">
-                </head>
-                <body>
-                    <nav>
-                        <a href="https://www.univ-poitiers.fr/"><img src="img/universite-poitiers-logo.jpg" alt="logo"></a>
-                        <a href="">Graphique</a>
-                        <a href="">Graphique</a>
-                    </nav>
-                    
-                    <h1>Voici la page html qui va afficher un tableau et un graphique</h1>
-                    
-                    <div class="description" >
-                        <p>blabazbdsauhbduahdhzuiahdiuahduiahdaudhaidh
-                        blabazbdsauhbduahdhzuiahdiuahduiahdaudhaidh
-                        blabazbdsauhbduahdhzuiahdiuahduiahdaudhaidh
-                        blabazbdsauhbduahdhzuiahdiuahduiahdaudhaidh
-                        blabazbdsauhbduahdhzuiahdiuahduiahdaudhaidh
-                        blabazbdsauhbduahdhzuiahdiuahduiahdaudhaidh</p>
-                    </div>
-                    
-                    <div class="tab">
-                        <p></p>
-                        <table>
-                        <tr>
-                            <td> ,colonne_1, </td>
-                            <td> ,colonne_2, </td>
-                        </tr>
-                        <tr>
-                            <td>11</td>
-                            <td>12</td>
-                        </tr>
-                        <tr>
-                            <td>21</td>
-                            <td>22</td>
-                        </tr>
-                        <tr>
-                            <td>31</td>
-                            <td>32</td>
-                        </tr>
-                        </table> 
-                    </div>
-                    <div class="graph">
-                        <img src="img/graphique.png" alt="logo">
-                    </div>
-                    
-                
-                </body>
-                </html> 
+                    <head>
+                        <link rel="stylesheet" href="stylesheet.css">
+                    </head>
+                    <body>
+                        <nav>
+                            <a href="https://www.univ-poitiers.fr/"><img src="img/universite-poitiers-logo.jpg" alt="logo"></a>
+                        </nav>
+    
+                        <div class="description" >
+                            <p>Bonjour et bienvenue sur notre projet de la SAE105 intitulé "calcul du débit d’une rivière par mesure de concentration en sel"</p>
+                        </div>
+                        <div class="resultat">
+                            <div class="box">
+                                <p></p>
+                                <p>Le résultat du calcul est :</p>
+                                <p>""",calcul,"""</p>
+                            
+                            </div>
+                            <p1>Voici la méthode de calcul du débit basée sur les concentrations en sel obtenues à partir des données fournies. </p1>
+                            <img src="img/graphique.png" alt="logo">
+                            <p2>Voici le graphique illustrant l'évolution des concentrations en sel au fil du temps.</p2>
+                        </div>
+                    </body>
+                </html>
            """
     genere_html("../html/index.html", "mon titre", body_html)
-    
+
 def stylesheet():
     """
+    Création de la structure de la page css.
 
     Returns
     -------
-    Création de la structure de la page css.
 
     """
-    body_css = """ 
+    body_css = """
                 body {
-                  background-color: blue;
+                  background-color: #E9E9E9;
                 }
-                
+
                 nav {
-                  background-color: white;  
+                  background-color: white;
                   width: 91%;
                   margin-left: 4%;
                   margin-right: 5%;
@@ -171,18 +150,10 @@ def stylesheet():
                   z-index: 5;
                   display: inline;
                   border-radius: 10px;
+                  border: 1px solid black;
                 }
-                
-                nav a  {
-                        
-                }
-                
-                h1 {
-                  color : blue;    
-                }
-                
+
                 div.description {
-                  background-image: url("img/wallpaper_description.jpeg");
                   background-size: cover;
                   background-repeat: no-repeat;
                   height: 100%;
@@ -193,92 +164,98 @@ def stylesheet():
                   right: 0px;
                   text-align: center;
                 }
-                
+
                 div.description p {
-                  margin-top: 23%;  
-                  color: gray;
+                  margin-top: 23%;
+                  color: black;
+                  font-family: monospace;
                   font-weight: bolder;
                   font-size: 150%;
                 }
 
-                div.tab {
-                  background-color: #686868;
-                  height: 100%;
+                div.resultat {
+                  background-color: #E9E9E9;
+                  height: 1000px;
                   width: 100%;
                   position: absolute;
                   top: 100%;
                   left: 0px;
                   right: 0px;
-                  align-items: center;
-            
-                }
-                
-                div.graph {
-                  background-color: #E9E9E9;
-                  height: 1000px;
-                  width: 100%;
-                  position: absolute;
-                  top: 200%;
-                  left: 0px;
-                  right: 0px;
                   text-align: center;
                   justify-content: center;
-                  
                 }
-                
-                table, th, td {
-                  border: 1px solid;
-                  border-collapse: collapse;
-                }
-                
-                table {
-                  position: relative;  
-                  right:40%
-                  top: 100px;
-                  
-                }
-                
-                
-  
-                nav a:hover {
-                  background-color: red;
-                  color:white;
-                }
-                
+
                 nav a img{
                   position: absolute;
                   width: 100px;
-                  height: 70px; 
+                  height: 70px;
                   top: 50%;
                   left: 50%;
                   transform: translate(-50%, -50%);
                 }
-      
-                div.graph img {
+
+                div.resultat img {
                   position: absolute;
-                  top: 50%;
-                  left: 50%;
+                  top: 65%;
+                  left: 75%;
                   transform: translate(-50%, -50%);
-                  width: 700px;  
-                  height: 500px;  
+                  width: 700px;
+                  height: 500px;
+                  border-radius: 30px;
+                  border: 1px solid black;
                 }
+                div.resultat div.box {
+                  background-color: white;
+                  position: absolute;
+                  top: 65%;
+                  left: 25%;
+                  transform: translate(-50%, -50%);
+                  width: 700px;
+                  height: 500px;
+                  border-radius: 30px;
+                  border: 1px solid black;
+                }
+                p1 {
+                  position: absolute;  
+                  width: 700px;
+                  top: 32.5%;
+                  left: 25%;
+                  transform: translate(-50%, -50%);  
+                  color: black;
+                  font-family: monospace;
+                  font-size: 20px;
+                  font-weight: bolder;
+                
+                }
+                p2 {
+                  position: absolute;  
+                  width: 700px;
+                  top: 32.5%;
+                  left: 75%;
+                  transform: translate(-50%, -50%);
+                  color: black;
+                  font-family: monospace;
+                  font-size: 20px;
+                  font-weight: bolder;
+                }
+                div.resultat div.box p [
+                    
+                ]
            """
     genere_css("../html/stylesheet.css", "mon titre", body_css)
 
 #Fonction permettant de calculer le débit d'une riviére
-def débit():
+def calcul_debit():
     Masse = 1037
     T = date_s_list
     for moyenne in range(col[5]):
         Cm = moyenne[moyenne]
         moyenne = moyenne[moyenne+1]
-    Ci = col[5]row[2]
+    Ci = col[5]+row[2]
     deltaC = Cm - Ci
     NaCi = deltaC/2
-    D = Masse/(NaCi*T)
-    return D
+    return Masse/(NaCi*T)
 
 if __name__ == "__main__":
-    main()
+    main(calcul_debit())
     stylesheet()
-    
