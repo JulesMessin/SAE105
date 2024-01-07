@@ -266,7 +266,7 @@ def calcul_debit():
     for moyenne in range(col[5]):
         Cm = moyenne[moyenne]
         moyenne = moyenne[moyenne+1]
-    Ci = col[5]+row[2]
+    Ci = value_list[2]
     deltaC = Cm - Ci
     NaCi = deltaC/2
     return Masse/(NaCi*T)
