@@ -119,7 +119,7 @@ def main(calcul):
                                 <p>Voici la formule :</p>
                                 <img src="img/formule.png">
                                 <p>Le résultat du calcul est :</p>
-                                <p></p>
+                                <p>""",str(calcul),"""</p>
                             
                             </div>
                             <p1>Voici la méthode de calcul du débit basée sur les concentrations en sel obtenues à partir des données fournies. </p1>
@@ -271,6 +271,6 @@ def calcul_debit():
     return Masse/(NaCi*T)
 
 if __name__ == "__main__":
-    calcul=45.0000099
-    main(calcul())
+    calculx=(calcul_debit())
+    main(calculx)
     stylesheet()

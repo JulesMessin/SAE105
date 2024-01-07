@@ -30,11 +30,18 @@
                 }
 
                 div.description p {
-                  margin-top: 23%;
+                  margin-top: 14%;
                   color: black;
                   font-family: monospace;
                   font-weight: bolder;
                   font-size: 150%;
+                }
+                div.description p.up {
+                  margin-top: 6%;
+                  color: black;
+                  font-family: monospace;
+                  font-weight: bolder;
+                  font-size: 100%;
                 }
 
                 div.resultat {
@@ -58,9 +65,9 @@
                   transform: translate(-50%, -50%);
                 }
 
-                div.resultat img {
+                div.resultat img.first {
                   position: absolute;
-                  top: 65%;
+                  top: 60%;
                   left: 75%;
                   transform: translate(-50%, -50%);
                   width: 700px;
@@ -71,18 +78,23 @@
                 div.resultat div.box {
                   background-color: white;
                   position: absolute;
-                  top: 65%;
+                  top: 60%;
                   left: 25%;
                   transform: translate(-50%, -50%);
                   width: 700px;
                   height: 500px;
                   border-radius: 30px;
                   border: 1px solid black;
+                  font-color: black;
+                  font-family: monospace;
+                  font-size: 20px;
+                  font-weight: bolder; 
+                  font-style: italic;
                 }
                 p1 {
                   position: absolute;  
                   width: 700px;
-                  top: 32.5%;
+                  top: 27.5%;
                   left: 25%;
                   transform: translate(-50%, -50%);  
                   color: black;
@@ -94,7 +106,7 @@
                 p2 {
                   position: absolute;  
                   width: 700px;
-                  top: 32.5%;
+                  top: 27.5%;
                   left: 75%;
                   transform: translate(-50%, -50%);
                   color: black;
@@ -102,4 +114,6 @@
                   font-size: 20px;
                   font-weight: bolder;
                 }
+                
+               
            
