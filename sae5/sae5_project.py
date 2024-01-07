@@ -107,18 +107,22 @@ def main(calcul):
                             <a href="https://www.univ-poitiers.fr/"><img src="img/universite-poitiers-logo.jpg" alt="logo"></a>
                         </nav>
     
-                        <div class="description" >
-                            <p>Bonjour et bienvenue sur notre projet de la SAE105 intitulé "calcul du débit d’une rivière par mesure de concentration en sel"</p>
+                        <div class="description">
+                            <p class="up">Réalisé par Jules Messin et Benjamin Vigner.</p>
+                            <p>Bonjour et bienvenue sur notre projet de la SAE105 intitulé "calcul du débit d’une rivière par mesure de concentration en sel".
+                            <br><br><br>L'objectif de ce projet est de déterminer le débit de la rivière en utilisant les concentrations de sel mesurées grâce à une sonde.
+                            <br><br>Nous devons donc concevoir un site web (HTML/CSS) à partir d'un fichier Python contenant le calcul du débit <br><br> et un graphique représentant la concentration en sel sur une période de temps.</p>
                         </div>
                         <div class="resultat">
                             <div class="box">
-                                <p></p>
+                                <p>Voici la formule :</p>
+                                <img src="img/formule.png">
                                 <p>Le résultat du calcul est :</p>
-                                <p>""",calcul,"""</p>
+                                <p></p>
                             
                             </div>
                             <p1>Voici la méthode de calcul du débit basée sur les concentrations en sel obtenues à partir des données fournies. </p1>
-                            <img src="img/graphique.png" alt="logo">
+                            <img class="first" src="img/graphique.png" alt="logo">
                             <p2>Voici le graphique illustrant l'évolution des concentrations en sel au fil du temps.</p2>
                         </div>
                     </body>
@@ -166,11 +170,18 @@ def stylesheet():
                 }
 
                 div.description p {
-                  margin-top: 23%;
+                  margin-top: 14%;
                   color: black;
                   font-family: monospace;
                   font-weight: bolder;
                   font-size: 150%;
+                }
+                div.description p.up {
+                  margin-top: 6%;
+                  color: black;
+                  font-family: monospace;
+                  font-weight: bolder;
+                  font-size: 100%;
                 }
 
                 div.resultat {
@@ -194,9 +205,9 @@ def stylesheet():
                   transform: translate(-50%, -50%);
                 }
 
-                div.resultat img {
+                div.resultat img.first {
                   position: absolute;
-                  top: 65%;
+                  top: 60%;
                   left: 75%;
                   transform: translate(-50%, -50%);
                   width: 700px;
@@ -207,18 +218,23 @@ def stylesheet():
                 div.resultat div.box {
                   background-color: white;
                   position: absolute;
-                  top: 65%;
+                  top: 60%;
                   left: 25%;
                   transform: translate(-50%, -50%);
                   width: 700px;
                   height: 500px;
                   border-radius: 30px;
                   border: 1px solid black;
+                  font-color: black;
+                  font-family: monospace;
+                  font-size: 20px;
+                  font-weight: bolder; 
+                  font-style: italic;
                 }
                 p1 {
                   position: absolute;  
                   width: 700px;
-                  top: 32.5%;
+                  top: 27.5%;
                   left: 25%;
                   transform: translate(-50%, -50%);  
                   color: black;
@@ -230,7 +246,7 @@ def stylesheet():
                 p2 {
                   position: absolute;  
                   width: 700px;
-                  top: 32.5%;
+                  top: 27.5%;
                   left: 75%;
                   transform: translate(-50%, -50%);
                   color: black;
@@ -238,16 +254,15 @@ def stylesheet():
                   font-size: 20px;
                   font-weight: bolder;
                 }
-                div.resultat div.box p [
-                    
-                ]
+                
+               
            """
     genere_css("../html/stylesheet.css", "mon titre", body_css)
 
 #Fonction permettant de calculer le débit d'une riviére
 def calcul_debit():
+    T=date_s_list
     Masse = 1037
-    T = date_s_list
     for moyenne in range(col[5]):
         Cm = moyenne[moyenne]
         moyenne = moyenne[moyenne+1]
@@ -257,5 +272,6 @@ def calcul_debit():
     return Masse/(NaCi*T)
 
 if __name__ == "__main__":
-    main(calcul_debit())
+    calcul=45.0000099
+    main(calcul())
     stylesheet()
