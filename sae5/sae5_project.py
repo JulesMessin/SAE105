@@ -1,6 +1,7 @@
 """import sae5_module.py"""
 import openpyxl
 import matplotlib.pyplot as plt
+import statistics
 
 
 #Je n'ai pas mis de fonction pour toute cette partie car cela provoque une erreur que je n'ai pas su résoudre à la génération du graphique (crée une sorte de griboullage sur le graphique obtenue)
@@ -261,12 +262,10 @@ def stylesheet():
 
 #Fonction permettant de calculer le débit d'une riviére
 def calcul_debit():
-    T=date_s_list
     Masse = 1037
-    for moyenne in range(col[5]):
-        Cm = moyenne[moyenne]
-        moyenne = moyenne[moyenne+1]
-    Ci = value_list[2]
+    T = date_s_list
+    Cm = statistics.mean(value_list)
+    Ci = value_list[0]
     deltaC = Cm - Ci
     NaCi = deltaC/2
     return Masse/(NaCi*T)
